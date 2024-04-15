@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burguer Express</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+<nav class="menu background-preto margem-interna">
+    <img class="img-logo" src="./imagens/logo.png" alt="logo">
+    <ul class="truculenta-100 alinhar-elementos fonte-open-sans">
+        <li>
+            <span class="titulo-grande">Burguer Express</span>
+            <span>Endereço: R. Pion Gertrude H. Fritzen, 7941 - Conj. Hab. Sol Nascente, Maringá - PR, 87053-105</span>
+            <span>Telefone: (44) 3226-5590</span>
+            <span>WhatsApp: (44) 99896-9986</span>
+        </li>
+    </ul>
+</nav>
+
+<section class="container">
+
+<div class="caixa-texto">
+    <h2 class="fonte-open-sans titulo">Burger Bacon</h2>
+    <div class="conteudo-item">
+        <img class="burguer_bacon" src="./imagens/burguer_bacon.png" alt="Burger Bacon">
+        <ul class="cor-branco fonte-open-sans ingredientes-1">
+            <li>Pão brioche, hamburguer artesanal de 200g, queijo, tiras de bacon, cebola crisp, alface e tomate.</li>
+            <li class="preco">R$37,00</li>
+        </ul>
+        <button type="button" class="truculenta-100 background-preto btn" onclick="salvar('Burger Bacon', 37.00)">Adicionar</button>
+    </div>
+</div>
+
+<div class="caixa-texto">
+    <h2 class="fonte-open-sans titulo">Cheddar Burguer</h2>
+    <div class="conteudo-item">
+        <img class="cheddar_burguer" src="./imagens/cheddar_burguer.png" alt="Cheddar Burguer">
+        <ul class="cor-branco fonte-open-sans ingredientes-2">
+            <li>Pão brioche, hamburguer artesanal de 150, queijo prato, alface e tomate.</li>
+            <li class="preco">R$32,00</li>
+        </ul>
+        <button type="button" class="truculenta-100 background-preto btn" onclick="salvar('Cheddar Burguer', 32.00)">Adicionar</button>
+    </div>
+</div>
+
+<div class="caixa-texto">
+    <h2 class="fonte-open-sans titulo">Classic Burguer</h2>
+    <div class="conteudo-item">
+        <img class="classic_burguer" src="./imagens/classic_burguer.png" alt="Classic Burguer">
+        <ul class="cor-branco fonte-open-sans ingredientes-3">
+            <li>Pão brioche, hamburguer artesanal de 150, queijo prato.</li>
+            <li class="preco">R$29,90</li>
+        </ul>
+        <button type="button" class="truculenta-100 background-preto btn" onclick="salvar('Classic Burguer', 29.90)">Adicionar</button>
+    </div>
+</div>
+
+<div class="caixa-texto">
+    <h2 class="fonte-open-sans titulo">Egg Burguer</h2>
+    <div class="conteudo-item">
+        <img class="egg_burguer" src="./imagens/egg_burguer.png" alt="Egg Burguer">
+        <ul class="cor-branco fonte-open-sans ingredientes-4">
+            <li>Pão brioche, hamburguer artesanal de 200g, ovo , queijo prato, tiras de bacon, alface e tomate.</li>
+            <li class="preco">R$35,00</li>
+        </ul>
+        <button type="button" class="truculenta-100 background-preto btn" onclick="salvar('Egg Burguer', 35.00)">Adicionar</button>
+    </div>
+</div>
+
+<h3 class="truculenta-100 titulo margem-interna">Pedido</h3>
+
+<div class="centro margem-interna">
+    <label for="quantidade" class="truculenta-100 label-input">Quantidade:</label>
+    <div class="quantidade-buttons">
+        <button type="button" class="quantidade-btn btn-icone" onclick="diminuirQuantidade()">-</button>
+        <input type="number" id="quantidade" name="quantidade" class="caixa-texto" value="1">
+        <button type="button" class="quantidade-btn btn-icone" onclick="aumentarQuantidade()">+</button>
+    </div>
+    <!-- <button type="button" class="truculenta-100 background-preto btn" onclick="salvar()">Salvar</button> -->
+</div>
+
+<div class="margem-interna">
+    <table class="centro tabela truculenta-100">
+        <thead>
+            <tr>
+                <th>Itens</th>
+                <th>Quantidade</th>
+                <th>Valor Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Itens serão adicionados dinamicamente aqui -->
+        </tbody>
+        <tfoot id="table-footer">
+            <tr>
+                <td>Total</td>
+                <td><span id="valor-total">R$ 0.00</span></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+</section>
+
+<footer class="rodape">
+<div class="texto-rodape">
+    <p>© Burguer Express - 2024. Todos os direitos Reservados.</p>
+</div>
+</footer>
+
+<script src="./js/main.js"></script>
+</body>
+</html>
