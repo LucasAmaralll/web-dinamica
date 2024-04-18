@@ -1,18 +1,18 @@
 let listaDeCompras = [];
 let indiceEdicao = -1;
 
-function limpaCampos() {
-    document.getElementById('quantidade').value = 1; // Definindo o valor inicial como 1
-}
+// function limpaCampos() {
+//     document.getElementById('quantidade').value = 1; // Definindo o valor inicial como 1
+// }
 
-function salvar(nomeItem, precoItem) {
-    let quantidade = parseInt(document.getElementById('quantidade').value);
+function salvar(nomeItem, precoItem, quantidade) {
+    //let quantidade = parseInt(document.getElementById('quantidade').value);
     
     // Verifica se a quantidade é válida (maior que 0)
-    if (quantidade <= 0 || isNaN(quantidade)) {
-        alert("A quantidade deve ser pelo menos 1.");
-        return;
-    }
+    // if (quantidade <= 0 || isNaN(quantidade)) {
+    //     alert("A quantidade deve ser pelo menos 1.");
+    //     return;
+    // }
 
     let valorTotal = (precoItem * quantidade).toFixed(2);
 
@@ -32,21 +32,27 @@ function salvar(nomeItem, precoItem) {
     listaDeCompras.push({ item: item, quantidade: quantidade, valorTotal: valorTotal });
 
     atualizarTotal();
-    limpaCampos();
+    //limpaCampos();
 }
 
-function aumentarQuantidade() {
-    let quantidadeInput = document.getElementById('quantidade');
-    let quantidade = parseInt(quantidadeInput.value);
-    quantidadeInput.value = quantidade + 1;
+function aumentarQuantidade(indice) {
+    let obj = listaDeCompras[indice];
+    unitario = obj.valorTotal / obj.quantidade;
+    obj.quantidade = obj.quantidade + 1;
+    obj.valorTotal = parseFloat((unitario * obj.quantidade), 0).toFixed(2);
+    atualizarTabela();
 }
 
-function diminuirQuantidade() {
-    let quantidadeInput = document.getElementById('quantidade');
-    let quantidade = parseInt(quantidadeInput.value);
-    if (quantidade > 1) {
-        quantidadeInput.value = quantidade - 1;
+function diminuirQuantidade(indice) {
+    let obj = listaDeCompras[indice];
+    unitario = obj.valorTotal / obj.quantidade;
+    obj.quantidade = obj.quantidade - 1;
+    if (obj.quantidade <= 0) {
+        obj.quantidade = 1;
+        alert("A quantidade deve ser pelo menos 1.");
     }
+    obj.valorTotal = parseFloat((unitario * obj.quantidade), 0).toFixed(2);
+    atualizarTabela();
 }
 
 function editarItem(indice) {
@@ -54,7 +60,6 @@ function editarItem(indice) {
     let obj = listaDeCompras[indice];
 
     document.getElementById('quantidade').value = obj.quantidade;
-    
 }
 
 function excluirItem(indice) {
@@ -76,10 +81,13 @@ function atualizarTabela() {
         let tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${item.item}</td>
-            <td>${item.quantidade}</td>
+            <td>
+                <button type="button" class="quantidade-btn btn-icone" onclick="diminuirQuantidade(${indice})">-</button>
+                ${item.quantidade}
+                <button type="button" class="quantidade-btn btn-icone" onclick="aumentarQuantidade(${indice})">+</button>
+            </td>
             <td>R$ ${item.valorTotal}</td>
             <td>
-                <button type="button" onclick="editarItem(${indice})" class="material-symbols-outlined btn-icone">edit</button>
                 <button type="button" onclick="excluirItem(${indice})" class="material-symbols-outlined btn-icone">delete</button>
             </td>
         `;
@@ -98,10 +106,13 @@ function adicionarItemAoHTML(item, quantidade, valorTotal, indice) {
     // Define o conteúdo da linha
     tr.innerHTML = `
         <td>${item}</td>
-        <td>${quantidade}</td>
+        <td>
+            <button type="button" class="quantidade-btn btn-icone" onclick="diminuirQuantidade(${indice})">-</button>
+            ${quantidade}
+            <button type="button" class="quantidade-btn btn-icone" onclick="aumentarQuantidade(${indice})">+</button>
+        </td>
         <td>R$ ${valorTotal}</td>
         <td>
-            <button type="button" class="material-symbols-outlined btn-icone" onclick="editarItem(${indice})">edit</button>
             <button type="button" class="material-symbols-outlined btn-icone" onclick="excluirItem(${indice})">delete</button>
         </td>
     `;
